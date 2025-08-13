@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
     const updateUser = (userData) => {
         setUser(userData);
     };
+    
     // Function to clear user data
     const clearUser = () => {
         setUser(null);
@@ -22,7 +23,7 @@ const UserProvider = ({ children }) => {
             clearUser,
         }}
         >
-            { children }
+            {children}
         </UserContext.Provider>
     );
 }
