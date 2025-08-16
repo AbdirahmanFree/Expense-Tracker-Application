@@ -16,6 +16,7 @@ const RecentTransactions = ({ transactions, onSeeMore }) => {
 
         <div className='mt-6'>
             {transactions?.slice(0,5)?.map((item) => (
+                //Icons not appearing come back later -08/2025
                 <TransactionInfoCard
                     key={item._id}
                     title={item.type == 'expense' ? item.category : item.source}
