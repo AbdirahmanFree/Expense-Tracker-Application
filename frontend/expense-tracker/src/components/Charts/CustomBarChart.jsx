@@ -38,11 +38,9 @@ const CustomBarChart = ({ data }) => {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          {/* Use the field that actually exists in your data */}
           <XAxis dataKey="category" tick={{ fontSize: 12, fill: "#555" }} />
           <YAxis
             tick={{ fontSize: 12, fill: "#555" }}
-            // Good for expenses that might be negative or positive
             domain={["dataMin - 10", "dataMax + 10"]}
             allowDecimals={false}
           />
