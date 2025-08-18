@@ -11,21 +11,18 @@ import {
 } from "recharts";
 
 const CustomBarChart = ({ data }) => {
-  const getBarColor = (index) => (index % 2 === 0 ? "#875cf5" : "#cfbefb");
+
+  const getBarColor = (index) => {
+    return index % 2 === 0 ? "#875cf5" : "#cfbefb"
+  };
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
-      const p = payload[0].payload;
       return (
         <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
-          <p className="text-xs font-semibold text-purple-800 mb-1">
-            {p.category}
-          </p>
+          <p className="text-xs font-semibold text-purple-800 mb-1">{payload[0].payload.category}</p>
           <p className="text-sm text-gray-600">
-            Amount:{" "}
-            <span className="text-sm font-medium text-gray-900">
-              ${Number(p.amount)}
-            </span>
+            Amount:<span className="text-sm font-medium text-gray-900">${payload[0].payload.amount}</span>
           </p>
         </div>
       );
@@ -37,17 +34,22 @@ const CustomBarChart = ({ data }) => {
     <div className="bg-white mt-6 w-full" style={{ height: 320 }}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="category" tick={{ fontSize: 12, fill: "#555" }} />
-          <YAxis
-            tick={{ fontSize: 12, fill: "#555" }}
-            domain={["dataMin - 10", "dataMax + 10"]}
-            allowDecimals={false}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <Bar dataKey="amount" radius={[10, 10, 0, 0]}>
-            {data?.map((_, i) => (
-              <Cell key={i} fill={getBarColor(i)} />
+          <CartesianGrid stroke= "none" />
+
+          <XAxis dataKey="category" tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
+          <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none"/>
+
+          <Tooltip content={CustomTooltip} />
+
+          <Bar 
+            dataKey="amount"
+            fill="#FF8042" 
+            radius={[10, 10, 0, 0]}
+            activeDot={{r: 8, fill: "yellow"}}
+            activeStyle={{ fill: "green"}}
+          >
+            {data?.map((entry, index) => (
+              <Cell key={index} fill={getBarColor(index)} />
             ))}
           </Bar>
         </BarChart>
